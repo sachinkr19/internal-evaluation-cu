@@ -1,19 +1,27 @@
 const express = require("express");
 const morgan = require("morgan");
-const mongoose = require("mongoose");
 const blogRoutes = require("./routes/blogRoutes");
 
 // express app
 const app = express();
 
-// connect to mongodb & listen for requests
-const dbURI =
+// Moongoose
+const mongoose = require("mongoose");
+// const dburi = "mongodb://localhost:27017/exam_db";
+const dburi =
   "mongodb+srv://newUserTemp:CFt3rd2I7DIDKiTQ@cluster0.bgynx.mongodb.net/?retryWrites=true&w=majority";
-
-mongoose
-  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(3000))
-  .catch((err) => console.log(err));
+//
+mongoose.connect(dburi, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+//Get the default connection
+const db = mongoose.connection;
+//Bind connection to error event (to get notification of connection errors)
+db.on("error", console.error.bind(console, "Database Connection Error:"));
+db.once("open", function () {
+  console.log("Monogo Connection OPEN");
+});
 
 // register view engine
 app.set("view engine", "ejs");
@@ -42,4 +50,13 @@ app.use("/blogs", blogRoutes);
 // 404 page
 app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
+});
+
+// Start the express app binded under the http module of the node library
+const http = require("http");
+const httpServer = http.Server(app);
+//
+const PORT = process.env.PORT || 3000;
+httpServer.listen(PORT, function () {
+  console.log(`Server Running on Port ${PORT}`);
 });
