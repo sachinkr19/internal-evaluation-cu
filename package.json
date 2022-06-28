@@ -2,25 +2,28 @@
   "name": "internal-evaluation-cu",
   "version": "1.0.0",
   "description": "blogging page for fitness freaks",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
+  "license": "ISC",
+  "author": "Sachin and Madhusudan",
+  "homepage": "https://github.com/sachinkr19/internal-evaluation-cu#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sachinkr19/internal-evaluation-cu.git"
   },
-  "author": "Sachin and Madhusudan",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/sachinkr19/internal-evaluation-cu/issues"
   },
-  "homepage": "https://github.com/sachinkr19/internal-evaluation-cu#readme",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "ejs": "^3.1.2",
     "express": "^4.17.1",
     "mongoose": "^5.9.10",
     "morgan": "^1.10.0"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
